@@ -16,15 +16,15 @@ function setupClickListeners() {
     // NOT WORKING YET :(
     // using a test object
     let koalaToSend = {
-      name: '#nameIn'.val(),
-      age: '#ageIn'.val(),
-      gender: '#genderIn'.val(),
-      readyForTransfer: '#readyForTransferIn'.val(),
-      notes: '#notesIn'.val(),
+      name: $('#nameIn').val(),
+      age: $('#ageIn').val(),
+      gender: $('#genderIn').val(),
+      transfer: $('#readyForTransferIn').val(),
+      notes: $('#notesIn').val(),
     };
     // call saveKoala with the new obejct
     saveKoala( koalaToSend );
-  }); 
+  });
   $('#viewKoalas').on('click', '.transferButton', transferKoala)
 }
 
@@ -36,7 +36,7 @@ function getKoalas(){
     url: '/holla',
   })
   .then(function(response){
-    let koalas = response
+    let koalas = response;
     render(koalas);
   })
   .catch (function(error){
@@ -63,25 +63,44 @@ function saveKoala( newKoala ){
  })
 }
 
-function render(){
+function render(koalas){
   $('#viewKoalas').empty();
   for (let koala of koalas){
-    let $tr = $(`<tr>
-    <td>${koala.name}</td>
-    <td>${koala.age}</td>
-    <td>${koala.gender}</td>
-    <td>${koala.readyForTransfer}</td>
-    <td>${koala.notes}</td>
-    <td class="readyForTransfer">&nbsp:</td>
-    <td><button class="delete">Euthanize</button></td>
-    </tr>
-    `);
-    if ( koala.readyForTransfer === 'false'){
-      $('#.readyForTransfer').append(`<button class="transferButton">Ready For Transfer</button>`)
+    let $tr;
+
+    if (koala.transfer == 'false') {
+      $tr = $(`
+      <tr>
+        <td>${koala.name}</td>
+        <td>${koala.age}</td>
+        <td>${koala.gender}</td>
+        <td>${koala.transfer}</td>
+        <td>${koala.notes}</td>
+        <td>
+          <button class="transferButton">Ready For Transfer</button>
+        </td>
+        <td>
+          <button class="delete">Euthanize</button>
+        </td>
+      </tr>
+      `)} else {
+        $tr = $(`
+        <tr>
+          <td>${koala.name}</td>
+          <td>${koala.age}</td>
+          <td>${koala.gender}</td>
+          <td>${koala.transfer}</td>
+          <td>${koala.notes}</td>
+          <td></td>
+          <td>
+            <button class="delete">Euthanize</button>
+          </td>
+        </tr >
+      `)}
+
+    $('#viewKoalas').append($tr);
+    $tr.data(koala);
     }
-    $('#viewKoalas').append($tr)
-    $tr.data(koala)
-  }
 }
 
 function transferKoala(){
@@ -101,4 +120,12 @@ function transferKoala(){
         console.log('Error updating transfer status');
         alert('Error updating transfer status')
     })
+}
+
+function clearInputs() {
+  $('#nameIn').val('');
+  $('#ageIn').val('');
+  $('#genderIn').val('');
+  $('#readyForTransferIn').val('');
+  $('#notesIn').val('');
 }
