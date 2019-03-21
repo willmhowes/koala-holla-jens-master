@@ -6,14 +6,16 @@
     <script src="vendors/jquery-3.3.1.min.js" charset="utf-8"></script>
     <script src="vendors/sweetalert.js"></script>
     <script src="scripts/client.js" charset="utf-8"></script>
+     <link rel="stylesheet" type="text/css" media="screen" href="style.css">
+     <link href="https://fonts.googleapis.com/css?family=Lilita+One" rel="stylesheet">
   </head>
   <body>
     <header>
-      <img src="images/icon.png" class="icon" />
-      <h1>Koala Holla</h1>
-      <h3>1976 Llama Comma Drive</h2>
-      <h3>Walla Walla, WA</h2>
     </header>
+    <div id="address">
+    <h1>Koala Holla</h1>
+    <h3>1976 Llama Comma Drive</h2>
+    <h3>Walla Walla, WA</h2>
     <section id="addKoala">
       <h2>Add Koala</h2>
       <input type="text" id="nameIn" value="" placeholder="Name">
@@ -23,7 +25,7 @@
       <input type="text" id="notesIn" value="" placeholder="Notes">
       <button type="button" id="addButton">Add Koala</button>
     </section>
-    <section>
+    <section id="tableSection">
       <h2>All Koalas</h2>
       <table>
         <thead>
