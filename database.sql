@@ -1,5 +1,5 @@
 CREATE TABLE "koala" (
-    "id" serial PRIMARY KEY,
+   	"id" serial PRIMARY KEY,
 	"name" varchar(30) not null,
 	"age" integer not null,
 	"gender" varchar(1) not null,
