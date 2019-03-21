@@ -25,6 +25,7 @@ function setupClickListeners() {
     // call saveKoala with the new obejct
     saveKoala( koalaToSend );
   }); 
+  $('#viewKoalas').on('click', '.transferButton', transferKoala)
 }
 
 function getKoalas(){
@@ -78,5 +79,26 @@ function render(){
     if ( koala.readyForTransfer === 'false'){
       $('#.readyForTransfer').append(`<button class="transferButton">Ready For Transfer</button>`)
     }
+    $('#viewKoalas').append($tr)
+    $tr.data(koala)
   }
+}
+
+function transferKoala(){
+    let $transferButton = $(this);
+    let $tr = $transferButton.closest('tr');
+    let koalaId = $tr.data('id');
+    console.log(koalaId);
+
+    $.ajax({
+        method: 'PUT',
+        url: `/holla/${koalaId}`
+    })
+    .then(function (response) {
+        getKoalas();
+    })
+    .catch( function (error){
+        console.log('Error updating transfer status');
+        alert('Error updating transfer status')
+    })
 }
