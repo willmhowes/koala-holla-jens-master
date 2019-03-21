@@ -28,7 +28,7 @@ function setupClickListeners() {
     saveKoala( koalaToSend );
   });
   $('#viewKoalas').on('click', '.transferButton', transferKoala);
-  ('#viewKoalas').on('click', '.delete', deleteKoala);
+  $('#viewKoalas').on('click', '.delete', checkDelete);
 }
 
 
@@ -143,13 +143,7 @@ function clearInputs() {
 }
 
 // delete koala by id gotten from data 
-function deleteKoala(){
-  console.log('in delete button');
-  let deleteButton = $(this);
-  let deletedRow = deleteButton.closest('tr');
-  console.log('The deleted row will be,', deletedRow);
-  let koalaId = deletedRow.data('id');
-  console.log('Koala id is', koalaId);
+function deleteKoala(koalaId){
 
   $.ajax({
     method: 'DELETE',
@@ -163,3 +157,27 @@ function deleteKoala(){
 
   })
 }
+
+function checkDelete(){
+  console.log('in check delete function');
+  let deleteButton = $(this);
+  let deletedRow = deleteButton.closest('tr');
+  console.log('The deleted row will be,', deletedRow);
+  let koalaId = deletedRow.data('id');
+  console.log('Koala id is', koalaId);
+
+  swal({
+    title: "Are you sure you want to euthanize?", 
+    icon: "images/punchingKoala.gif",
+    buttons: true,
+    dangerMode: true,
+    })
+    .then(function (value) {
+      if (value === true ) {
+        deleteKoala(koalaId);
+      }
+      else {
+        swal('They shall live another day!');
+      }
+    })
+  }
