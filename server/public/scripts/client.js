@@ -27,7 +27,8 @@ function setupClickListeners() {
     // call saveKoala with the new obejct
     saveKoala( koalaToSend );
   });
-  $('#viewKoalas').on('click', '.transferButton', transferKoala)
+  $('#viewKoalas').on('click', '.transferButton', transferKoala);
+  ('#viewKoalas').on('click', '.delete', deleteKoala);
 }
 
 
@@ -139,4 +140,26 @@ function clearInputs() {
   $('#genderIn').val('');
   $('#readyForTransferIn').val('');
   $('#notesIn').val('');
+}
+
+// delete koala by id gotten from data 
+function deleteKoala(){
+  console.log('in delete button');
+  let deleteButton = $(this);
+  let deletedRow = deleteButton.closest('tr');
+  console.log('The deleted row will be,', deletedRow);
+  let koalaId = deletedRow.data('id');
+  console.log('Koala id is', koalaId);
+
+  $.ajax({
+    method: 'DELETE',
+    url: `/holla/${koalaId}`
+  })
+  .then( function(response){
+    getKoalas();
+  }).catch( function(error) {
+    console.log('Could not delete koala', error);
+    alert(`Sorry! Could not delete koala`);
+
+  })
 }
