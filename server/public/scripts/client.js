@@ -1,4 +1,5 @@
 console.log( 'js' );
+const swal = require('sweetalert');
 
 $( document ).ready( function(){
   console.log( 'JQ' );
@@ -28,7 +29,7 @@ function setupClickListeners() {
     saveKoala( koalaToSend );
   });
   $('#viewKoalas').on('click', '.transferButton', transferKoala);
-  ('#viewKoalas').on('click', '.delete', deleteKoala);
+  $('#viewKoalas').on('click', '.delete', checkDelete);
 }
 
 
@@ -163,3 +164,20 @@ function deleteKoala(){
 
   })
 }
+
+function checkDelete(){
+  swal({
+    title: "Are you sure you want to euthanize?", 
+    icon: "images/punchingKoala.gif:",
+    buttons: true,
+    dangerMode: true,
+    })
+    .then(function (value) {
+      if (value === true ) {
+        deleteKoala();
+      }
+      else {
+        swal('They shall live another day!');
+      }
+    })
+  }
