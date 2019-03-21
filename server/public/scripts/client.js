@@ -9,6 +9,8 @@ $( document ).ready( function(){
 
 }); // end doc ready
 
+
+//function sets up click listeners for the add button, transfer button and the delete/remove button
 function setupClickListeners() {
   $( '#addButton' ).on( 'click', function(){
     console.log( 'in addButton on click' );
@@ -28,6 +30,8 @@ function setupClickListeners() {
   $('#viewKoalas').on('click', '.transferButton', transferKoala)
 }
 
+
+//function will get koala information from database and use the render function to add koala to DOM
 function getKoalas(){
   console.log( 'in getKoalas' );
   // ajax call to server to get koalas
@@ -45,6 +49,8 @@ function getKoalas(){
   })
 } // end getKoalas
 
+
+//function sends new koala data to server to then be added to the database-- upon successful adding to DB, will get database information and run render function to update DOM
 function saveKoala( newKoala ){
   console.log( 'in saveKoala', newKoala );
   // ajax call to server to get koalas
@@ -63,6 +69,8 @@ function saveKoala( newKoala ){
  })
 }
 
+// function renders the DOM-- adds row to table with koala data and appends a remove button to remove koala and a ready to transfer
+//button depending on ready for transfer status
 function render(koalas){
   $('#viewKoalas').empty();
   for (let koala of koalas){
@@ -103,6 +111,7 @@ function render(koalas){
     }
 }
 
+//function will send koala id data to server to then update the database if transfer button has been clicked-- changing koala transfer data
 function transferKoala(){
     let $transferButton = $(this);
     let $tr = $transferButton.closest('tr');
@@ -122,6 +131,7 @@ function transferKoala(){
     })
 }
 
+//function will clear input fields when koala has been added
 function clearInputs() {
   $('#nameIn').val('');
   $('#ageIn').val('');
