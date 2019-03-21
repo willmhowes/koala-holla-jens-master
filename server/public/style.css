@@ -40,7 +40,7 @@ input {
 
 table {
     border-collapse: collapse;
-    width: 1200px;
+    width: 1000px;
   }
   
   th, td, tfoot {
@@ -70,12 +70,11 @@ td{
   }
 
   #tableSection {
-    margin: 0 25% 5% 25%;
+    margin: 0 13% 5% 13%;
   }
 
   #addKoala{
-    width: 100%;
-    margin: 0 25% 0 25%;
+    margin: 0 13% 5% 13%; 
   }
 
   .delete {
