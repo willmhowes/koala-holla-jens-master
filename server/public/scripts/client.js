@@ -120,7 +120,8 @@ function transferKoala(){
 
     $.ajax({
         method: 'PUT',
-        url: `/holla/${koalaId}`
+        url: `/holla/${koalaId}`,
+        data: koalaId,
     })
     .then(function (response) {
         getKoalas();
