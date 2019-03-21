@@ -83,7 +83,7 @@ function render(koalas){
         <td>${koala.name}</td>
         <td>${koala.age}</td>
         <td>${koala.gender}</td>
-        <td>${koala.transfer}</td>
+        <td class="transferStatus">${koala.transfer}</td>
         <td>${koala.notes}</td>
         <td>
           <button class="transferButton">Ready For Transfer</button>
@@ -98,7 +98,7 @@ function render(koalas){
           <td>${koala.name}</td>
           <td>${koala.age}</td>
           <td>${koala.gender}</td>
-          <td>${koala.transfer}</td>
+          <td class="transferStatus">${koala.transfer}</td>
           <td>${koala.notes}</td>
           <td></td>
           <td>
@@ -180,4 +180,9 @@ function checkDelete(){
         swal('They shall live another day!');
       }
     })
+  }
+
+
+  function gluePrep(){
+    if ()
   }
