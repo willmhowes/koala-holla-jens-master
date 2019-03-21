@@ -30,7 +30,18 @@ function setupClickListeners() {
 function getKoalas(){
   console.log( 'in getKoalas' );
   // ajax call to server to get koalas
-  
+  $.ajax({
+    method: 'GET',
+    url: '/holla',
+  })
+  .then(function(response){
+    let koalas = response
+    render(koalas);
+  })
+  .catch (function(error){
+    console.log('Could not get koalas');
+    alert(`Could not get koalas`);
+  })
 } // end getKoalas
 
 function saveKoala( newKoala ){
@@ -46,7 +57,26 @@ function saveKoala( newKoala ){
    clearInputs();
  })
  .catch(function (error){
-   console.log('unable to save new koala')
+   console.log('unable to save new koala');
    alert(`Unable to save new koala`);
  })
+}
+
+function render(){
+  $('#viewKoalas').empty();
+  for (let koala of koalas){
+    let $tr = $(`<tr>
+    <td>${koala.name}</td>
+    <td>${koala.age}</td>
+    <td>${koala.gender}</td>
+    <td>${koala.readyForTransfer}</td>
+    <td>${koala.notes}</td>
+    <td class="readyForTransfer">&nbsp:</td>
+    <td><button class="delete">Euthanize</button></td>
+    </tr>
+    `);
+    if ( koala.readyForTransfer === 'false'){
+      $('#.readyForTransfer').append(`<button class="transferButton">Ready For Transfer</button>`)
+    }
+  }
 }
