@@ -8,7 +8,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static('server/public'));
 
 // ROUTES
-app.use('/hollas', koalaRouter);
+app.use('/holla', koalaRouter);
 
 // Start listening for requests on a specific port
 app.listen(PORT, () => {

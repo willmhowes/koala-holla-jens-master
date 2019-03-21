@@ -1,5 +1,5 @@
 const express = require('express');
-const koalaRouter = express.Router();
+const router = express.Router();
 
 // DB CONNECTION
 const pool = require('./pool');
@@ -18,12 +18,12 @@ router.get('/', (req, res) => {
 
 // POST
 router.post('/', (req, res) => {
-   let koala = req.body();
+   let koala = req.body;
    console.log(`adding koala`, koala);
-   let sqlText = `INSERT INTO "koala" ("name", "age", "gender", "readyToTransfer", "notes")
+   let sqlText = `INSERT INTO "koala" ("name", "age", "gender", "transfer", "notes")
    VALUES ($1, $2, $3, $4, $5);`;
 
-   pool.query(sqlText, (koala.name, koala.age, koala.gender, koala.readyToTransfer, koala.notes))
+   pool.query(sqlText, [koala.name, koala.age, koala.gender, koala.transfer, koala.notes])
       .then((response) => {
          res.sendStatus(201);
       }).catch((error) => {
@@ -40,7 +40,7 @@ router.put('/:id', (req, res) => {
    console.log(`Updating koala id: ${koalaID} with data`, koalaData);
 
    // hard update koala.readyToTransfer to 'true'
-   let sqlText = `UPDATE "koala" SET "readyToTransfer" = 'true' WHERE "id" = $1;`;
+   let sqlText = `UPDATE "koala" SET "transfer" = 'true' WHERE "id" = $1;`;
 
    pool.query(sqlText, [koalaID])
       .then((result) => {
@@ -53,4 +53,4 @@ router.put('/:id', (req, res) => {
 
 // DELETE
 
-module.exports = koalaRouter;
+module.exports = router;
