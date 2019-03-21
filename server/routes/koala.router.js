@@ -33,6 +33,23 @@ router.post('/', (req, res) => {
 });
 
 // PUT
+router.put('/:id', (req, res) => {
+
+   let koalaID = req.params.id;
+   let koalaData = req.body;
+   console.log(`Updating koala id: ${koalaID} with data`, koalaData);
+
+   // hard update koala.readyToTransfer to 'true'
+   let sqlText = `UPDATE "koala" SET "readyToTransfer" = 'true' WHERE "id" = $1;`;
+
+   pool.query(sqlText, [koalaID])
+      .then((result) => {
+         res.sendStatus(200);
+      }).catch((error) => {
+         console.log('Failed to PUT', error);
+         res.sendStatus(500);
+      });
+})
 
 // DELETE
 
