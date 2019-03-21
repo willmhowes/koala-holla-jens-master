@@ -49,8 +49,21 @@ router.put('/:id', (req, res) => {
          console.log('Failed to PUT', error);
          res.sendStatus(500);
       });
-})
+});
 
 // DELETE
+router.delete('/:id', (req,res) => {
+   let koalaID = req.params.id;
+   console.log('trying to delete:', koalaID);
+   let sqlText = `DELETE FROM "koala" WHERE "id" = $1;`;
+
+   pool.query(sqlText, [koalaID])
+      .then((result) => {
+         res.sendStatus(200);
+      }).catch((error) => {
+         console.log('Failed to DELETE', error);
+         res.sendStatus(500);
+      });
+});
 
 module.exports = router;
